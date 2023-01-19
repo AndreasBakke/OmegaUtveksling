@@ -1,38 +1,25 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-
-function App
-() ***REMOVED***
-  const [data, setData, listItems] = React.useState(null);
-
-  React.useEffect(() => ***REMOVED***
-    fetch("/studieprogram")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-***REMOVED***, []);
-  console.log(data);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Velkommen til NTNUtveksling</h1>
-        <h2>Finn fag for ditt studieprogram</h2>
-        <div className="Course-Menu">
-          
-          <span></span><br></br>
-          <span></span><br></br><span></span><br></br>
-          <p>***REMOVED***!data ? "loading..." : listItems}</p>
-          <span></span><br></br>
-          <span></span><br></br>
-          <span></span><br></br>
-        </div>
-
-        <p>***REMOVED***!data ? "Loading..." : data}</p>
-      </header>
-    </div>
-  );
+import React from 'react';
+import './App.css';
+import Navbar from './components/navbar';
+import ***REMOVED*** BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
+import Home from './pages';
+import About from './pages/about';
+import NewCourses from './pages/newCourses'
+import Overview from './pages/overview';
+  
+function App() ***REMOVED***
+return (
+    <Router>
+    <Navbar />
+    <Routes>
+        <Route exact path='/'   element=***REMOVED***<Home />} />
+        <Route path='/about' element=***REMOVED***<About/>} />
+        <Route path='/newCourses' element=***REMOVED***<NewCourses/>} />
+        <Route path='/overview' element=***REMOVED***<Overview/>} />
+    </Routes>
+    </Router>
+);
 }
-
+  
 export default App;
-
-
