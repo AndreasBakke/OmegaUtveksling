@@ -21,6 +21,7 @@ const dbOperations=***REMOVED***
       ***REMOVED***)
   ***REMOVED***,
     async addCourse(obj, res)***REMOVED***
+        //Also add country and city to respective references!  (Makes adding more easier)
         //Verify that course is not made already
         newCourse = courseRef.push(obj);
         key=newCourse.getKey()

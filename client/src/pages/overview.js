@@ -102,7 +102,8 @@ const Overview = () => ***REMOVED***
   
   return (
     <div id='overviewContent'>
-    <h2 onClick=***REMOVED***addCourse}>test</h2>
+    ***REMOVED***/*<h2 onClick=***REMOVED***addCourse}>test</h2>*/}
+    <h1 className='centerHeader'>Oversikt over emner</h1>
     <br/>
         <FilterBar searchValue=***REMOVED***searchText} courseTypeValue=***REMOVED***courseType} onSearch=***REMOVED***handleSearch} onTypeChange=***REMOVED***handleCourseTypeChange}/>
         ***REMOVED***courses.isLoading ? (<p>Loading Courses...</p>) : 

@@ -44,7 +44,6 @@ const CoursesList = (***REMOVED***courses, handleRemoveCourse}) => ***REMOVED***
       <tbody>
       ***REMOVED***courses.map(course => ***REMOVED***
         return (
-          
           <tr key=***REMOVED***course.id}>
             <td>***REMOVED***capitalizeFirstLetter(course.country)}</td>
             <td>***REMOVED***capitalizeFirstLetter(course.city)}</td>
