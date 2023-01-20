@@ -1,0 +1,74 @@
+***REMOVED***
+    "countries":***REMOVED***
+        "italia": "italia",
+        "frankrike": "frankrike"
+  ***REMOVED***,
+
+    "cities":***REMOVED***
+        "torino": ***REMOVED***
+            "italia": true
+      ***REMOVED***,
+        "milano": ***REMOVED***
+            "italia": true
+      ***REMOVED***,
+        "paris": ***REMOVED***
+            "frankrike": true
+      ***REMOVED***
+  ***REMOVED***,
+
+    "universities": ***REMOVED***
+        "politecnico di torino": ***REMOVED***
+            "italia": true,
+            "torino": true
+            
+      ***REMOVED***,
+        "politecnico di milano": ***REMOVED***
+            "italia": true,
+            "milano": true
+      ***REMOVED***
+  ***REMOVED***,
+
+    "courses": ***REMOVED***
+        "00000001": ***REMOVED***
+            "country": "italy",
+            "city": "torino",
+            "university": "politecnico di torino",
+            "name": "digital electronics",
+            "code": "02MIVOQ",
+            "modality": ***REMOVED***
+                "skriftlg": true,
+                "muntlig": true
+          ***REMOVED***,
+            "semester": ***REMOVED***
+                "høst":true
+          ***REMOVED***,
+            "type": ***REMOVED***
+                "obligatorisk":true
+          ***REMOVED***,
+            "url": ***REMOVED***
+                "1": "https://didattica.polito.it/pls/portal30/gap.pkg_guide.viewGap?p_cod_ins=02LQDOV&p_a_acc=2023&p_header=S&p_lang=IT&multi=N"
+          ***REMOVED***,
+            "language": ***REMOVED***
+                "english":true
+          ***REMOVED***,
+            "equivalent": ***REMOVED***
+                "TFE4141":true
+          ***REMOVED***
+      ***REMOVED***
+  ***REMOVED***,
+
+    "reviews": ***REMOVED***
+        "00000001":***REMOVED***
+            "course": "00000001",
+            "difficulty": 3,
+            "relevance": 5,
+            "enjoyment": 4,
+            "semester": "h22",
+            "approved by": "Per Gunnar Kjeldsberg",
+            "approved date": "13-12-2021",
+            "comment": "Bra fag med mye praktisk labarbeid!"
+      ***REMOVED***
+  ***REMOVED***
+}
+
+

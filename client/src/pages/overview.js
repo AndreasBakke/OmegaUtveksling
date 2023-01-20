@@ -30,6 +30,18 @@ const coursesReducer = (state, action) => ***REMOVED***
 
 
 
+async function addCourse()***REMOVED***
+  
+  await fetch('http://localhost:3001/addCourse',***REMOVED***
+    method: 'POST',
+    headers: ***REMOVED***
+      'Content-Type': 'application/json',
+  ***REMOVED***,
+    body: JSON.stringify(***REMOVED***country: 'italia', city: 'torino', uni: 'politecnico di torino', name: 'operating systems for embedded systems', code: '02NPSOV', modality: ['s', 'p'], semester: ["høst"],type: ["ias"], url: ["https://didattica.polito.it/pls/portal30/gap.pkg_guide.viewGap?p_cod_ins=02NPSOV&p_a_acc=2023&p_header=S&p_lang=IT&multi=N"], language: ["engelsk"], equivalent: [""]})
+***REMOVED***)
+}
+
+
 const Overview = () => ***REMOVED***
     const [searchText, setSearchText] = useState(
         localStorage.getItem('searchText') || '');
@@ -46,13 +58,20 @@ const Overview = () => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     dispatchCourses(***REMOVED***type: 'FETCH_COURSES_START'});
-    fetch("/courses")
+    fetch("/getCourses")
       .then(response => response.json())
       .then(
         result => ***REMOVED***
+          var array = [];
+          var data = result.data;
+          for(var key in data) ***REMOVED***
+            var course = data[key];
+            course.id=key;
+            array.push(course);
+        ***REMOVED***
           dispatchCourses(***REMOVED***
             type: 'FETCH_COURSES_SUCCESS',
-            payload: result
+            payload: array
         ***REMOVED***);
       ***REMOVED***
       )
@@ -67,9 +86,8 @@ const Overview = () => ***REMOVED***
     localStorage.setItem('courseType', courseType)
 ***REMOVED***)
 
-
   const filteredCourses = courses.data.filter(course => ***REMOVED***
-    
+      console.log(course)
     return (courseType == "all" || course.type.join(" ").includes(courseType)) && (course.country.toLowerCase().includes(searchText.toLowerCase()) || course.city.toLowerCase().includes(searchText.toLowerCase())  || course.university.toLowerCase().includes(searchText.toLowerCase())  || course.name.toLowerCase().includes(searchText.toLowerCase()) || course.equivalent.join(" ").toLowerCase().includes(searchText.toLowerCase()))
 ***REMOVED***);
 
@@ -84,6 +102,7 @@ const Overview = () => ***REMOVED***
   
   return (
     <div id='overviewContent'>
+    <h2 onClick=***REMOVED***addCourse}>test</h2>
     <br/>
         <FilterBar searchValue=***REMOVED***searchText} courseTypeValue=***REMOVED***courseType} onSearch=***REMOVED***handleSearch} onTypeChange=***REMOVED***handleCourseTypeChange}/>
         ***REMOVED***courses.isLoading ? (<p>Loading Courses...</p>) : 

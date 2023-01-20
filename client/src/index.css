@@ -48,4 +48,60 @@ tr ***REMOVED***
 
 input ***REMOVED***
   margin-right: 10px;
+  margin-left: 10px
+}
+
+.newCoursesContent ***REMOVED***
+  width: 90%;
+  margin: 0 auto;
+}
+
+
+
+.centerHeader ***REMOVED***
+  text-align: center;
+}
+.courseDiv, #mainCategories ***REMOVED***
+  width: 100%;
+  display: flex;
+  max-width: 700px;
+  margin:0 auto;
+  
+}
+
+#mainCategories ***REMOVED***
+  flex-direction: column;
+}
+
+.courseIndexDiv ***REMOVED***
+  width: 25px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.courseInfoDiv ***REMOVED***
+  width:calc(100% - 60px);
+  padding-left: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.courseCloseDiv ***REMOVED***
+  width: 25px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+label ***REMOVED***
+  margin-bottom: 5px;
+}
+
+.courseField ***REMOVED***
+  margin-bottom: 5px;
 }
