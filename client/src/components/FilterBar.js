@@ -12,8 +12,9 @@ const FilterBar = (***REMOVED***searchValue, courseTypeValue, onSearch, onTypeCh
             <option value="all">Alle</option>
             <option value="obligatorisk">Obligatorisk</option>
             <option value="valgfag">Valgfag</option>
-            <option value="k-emne">K-emne</option>
+            <option value="kemne">K-emne</option>
             <option value="ias">Ingeniøremne annet studieprogram</option>
+            <option value="a">Annet</option>
         </select>
     </div>
 );

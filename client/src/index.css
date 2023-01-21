@@ -86,7 +86,7 @@ input ***REMOVED***
   
 }
 .courseInfoDiv ***REMOVED***
-  width:calc(100% - 60px);
+  width: 100%;
   padding-left: 10px;
   display: flex;
   align-content: center;
@@ -121,10 +121,9 @@ label ***REMOVED***
 }
 
 .mainCategoriesInput ***REMOVED***
-  width: 40%;
   margin-top: 5px;
   margin-left: 50px;
-  width: 40%;
+  width: 70%;
   padding:5px;
 }
 
@@ -149,10 +148,87 @@ label ***REMOVED***
 .courseTextInput ***REMOVED***
   margin-top: 5px;
   margin-left: 50px;
-  width: 40%;
+  width: 70%;
   padding:5px;
 }
 
 .sliderDiv ***REMOVED***
   padding-left: 50px;
 }
+
+.buttonDiv ***REMOVED***
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+}
+
+.addCourseBtn ***REMOVED***
+  border: 1px solid black;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.addCourseBtn:hover ***REMOVED***
+  background-color: #EEE;
+  cursor: pointer;
+}
+
+.addCourseBtn:active ***REMOVED***
+  background-color: #DDD;
+}
+
+
+input.error:invalid***REMOVED***
+  border: 1px solid red;
+}
+
+.inputNote ***REMOVED***
+  color: grey;
+  font-size: small;
+  margin-left: 50px;
+}
+
+
+
+
+/* Star rating */
+.rate ***REMOVED***
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+  margin-left: 50px;
+}
+.rate:not(:checked) > input ***REMOVED***
+  position:absolute;
+  clip: rect(0,0,0,0);
+}
+.rate:not(:checked) > label ***REMOVED***
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before ***REMOVED***
+  content: '★ ';
+}
+.rate > input:checked ~ label ***REMOVED***
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label ***REMOVED***
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label ***REMOVED***
+  color: #c59b08;
+}
+

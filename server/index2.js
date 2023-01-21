@@ -3,7 +3,9 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const firebase = require("./firebase.js")
-
+var bodyParser = require('body-parser');
+const ***REMOVED*** json } = require("body-parser");
+var jsonParser = bodyParser.json();
 
 const courses_data = [
   ***REMOVED***
@@ -52,7 +54,8 @@ app.get("/getCourses", (req, res) => ***REMOVED***
     firebase.dbOperations.getAllCourses(res);
 });
 
-app.post('/addCourse', (req, res) => ***REMOVED***
+app.post('/addCourse', jsonParser, (req, res) => ***REMOVED***
+    console.log(req.body)
     const testObj = ***REMOVED***
         "country": "italia",
         "city": "torino",
@@ -66,7 +69,9 @@ app.post('/addCourse', (req, res) => ***REMOVED***
         "language": ["english"],
         "equivalent": [ "TFE4141"]
   ***REMOVED***
-    firebase.dbOperations.addCourse(testObj)
+    firebase.dbOperations.addCourse(req.body).then(key => ***REMOVED***
+        res.send(***REMOVED***"key":key, "success": true})
+  ***REMOVED***)
 })
 
 

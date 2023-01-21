@@ -34,8 +34,33 @@ const dbOperations=***REMOVED***
   ***REMOVED***
     
 }
-
-
+//Update addCourse to something like this ( handle dupes)
+/*
+async function createUser(user: User) ***REMOVED***
+    try ***REMOVED***
+        const newDocRef = db.collection('Users').doc()
+        await db.runTransaction(async t => ***REMOVED***
+            const checkRef = db.collection('Users')
+                .where('username', '==', user.username)
+            const doc = await t.get(checkRef)
+            if (!doc.empty) ***REMOVED***
+                throw new FirebaseError('firestore/unique-restriction',
+                    `There is already a user with the username: '$***REMOVED***user.username}' in the database.`
+                )
+          ***REMOVED***
+            await t.create(newDocRef, user)
+      ***REMOVED***)
+        console.log('User Created')
+  ***REMOVED*** catch (err) ***REMOVED***
+        if (err instanceof FirebaseError) ***REMOVED***
+            console.log('Some error in firebase')
+            //Do something
+      ***REMOVED*** else ***REMOVED***
+            console.log('Another error')
+            //Do whatever
+      ***REMOVED***
+  ***REMOVED***
+}*/
 module.exports = ***REMOVED***
     dbOperations
 }

@@ -30,16 +30,6 @@ const coursesReducer = (state, action) => ***REMOVED***
 
 
 
-async function addCourse()***REMOVED***
-  
-  await fetch('http://localhost:3001/addCourse',***REMOVED***
-    method: 'POST',
-    headers: ***REMOVED***
-      'Content-Type': 'application/json',
-  ***REMOVED***,
-    body: JSON.stringify(***REMOVED***country: 'italia', city: 'torino', uni: 'politecnico di torino', name: 'operating systems for embedded systems', code: '02NPSOV', modality: ['s', 'p'], semester: ["høst"],type: ["ias"], url: ["https://didattica.polito.it/pls/portal30/gap.pkg_guide.viewGap?p_cod_ins=02NPSOV&p_a_acc=2023&p_header=S&p_lang=IT&multi=N"], language: ["engelsk"], equivalent: [""]})
-***REMOVED***)
-}
 
 
 const Overview = () => ***REMOVED***
