@@ -38,6 +38,9 @@ const Overview = () => ***REMOVED***
     
     const [courseType, setCourseType] = useState(
         localStorage.getItem('courseType') || 'all');
+    
+    const [semesterValue, setSemesterValue] = useState(
+        localStorage.getItem('semesterValue') || 'begge')
 
     const [courses, dispatchCourses] = useReducer(
         coursesReducer,
@@ -65,7 +68,7 @@ const Overview = () => ***REMOVED***
         ***REMOVED***);
       ***REMOVED***
       )
-      .catch((e) => console.log("error fetching courses" + e))
+      .catch((e) => console.log("error fetching courses " + e))
 ***REMOVED***, []);
 
   useEffect(()=> ***REMOVED***
@@ -74,19 +77,34 @@ const Overview = () => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     localStorage.setItem('courseType', courseType)
-***REMOVED***)
+***REMOVED***, [courseType]);
+
+  useEffect(() => ***REMOVED***
+    localStorage.setItem('semesterValue', semesterValue)
+***REMOVED***, [semesterValue]);
 
   const filteredCourses = courses.data.filter(course => ***REMOVED***
-      console.log(course)
-    return (courseType == "all" || course.type.join(" ").includes(courseType)) && (course.country.toLowerCase().includes(searchText.toLowerCase()) || course.city.toLowerCase().includes(searchText.toLowerCase())  || course.university.toLowerCase().includes(searchText.toLowerCase())  || course.name.toLowerCase().includes(searchText.toLowerCase()) || course.equivalent.join(" ").toLowerCase().includes(searchText.toLowerCase()))
+    return (courseType == "all" || course.type.join(" ").includes(courseType)) && (semesterValue == "begge" || course.semester.join(" ").includes(semesterValue)) && (course.country.toLowerCase().includes(searchText.toLowerCase()) || course.city.toLowerCase().includes(searchText.toLowerCase())  || course.university.toLowerCase().includes(searchText.toLowerCase())  || course.name.toLowerCase().includes(searchText.toLowerCase()) || course.equivalent.join(" ").toLowerCase().includes(searchText.toLowerCase()))
 ***REMOVED***);
+
+
+    //filtrering kan senere gjøres noe sånn. men med state som har value og asc/dec for hva som skal filtreres
+  filteredCourses.sort((a,b) => ***REMOVED***
+    if(a.country < b.country)***REMOVED***
+      return -1;
+  ***REMOVED***
+***REMOVED***)
 
   const handleSearch = event => ***REMOVED***
     setSearchText(event.target.value);
 ***REMOVED***;
 
-    const handleCourseTypeChange = event => ***REMOVED***
+  const handleCourseTypeChange = event => ***REMOVED***
     setCourseType(event.target.value);
+***REMOVED***
+
+  const handleSemesterChoiceChange =event => ***REMOVED***
+    setSemesterValue(event.target.value);
 ***REMOVED***
 
   
@@ -95,9 +113,9 @@ const Overview = () => ***REMOVED***
     ***REMOVED***/*<h2 onClick=***REMOVED***addCourse}>test</h2>*/}
     <h1 className='centerHeader'>Oversikt over emner</h1>
     <br/>
-        <FilterBar searchValue=***REMOVED***searchText} courseTypeValue=***REMOVED***courseType} onSearch=***REMOVED***handleSearch} onTypeChange=***REMOVED***handleCourseTypeChange}/>
-        ***REMOVED***courses.isLoading ? (<p>Loading Courses...</p>) : 
-        (<CoursesList courses=***REMOVED***filteredCourses} />)
+        <FilterBar searchValue=***REMOVED***searchText} courseTypeValue=***REMOVED***courseType} courseSemesterValue=***REMOVED***semesterValue} onSearch=***REMOVED***handleSearch} onTypeChange=***REMOVED***handleCourseTypeChange} onSemesterChange=***REMOVED***handleSemesterChoiceChange}/>
+        ***REMOVED***courses.isLoading ? (<p>Laster inn fag..</p>) : 
+        (<CoursesList courses=***REMOVED***filteredCourses}/>)
       ***REMOVED***
     
   </div>

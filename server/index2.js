@@ -53,26 +53,31 @@ app.get("/courses", (req, res) => ***REMOVED***
 app.get("/getCourses", (req, res) => ***REMOVED***
     firebase.dbOperations.getAllCourses(res);
 });
+app.get("/getCourseById", (req, res) => ***REMOVED***
+    const id=req.query.id
+    firebase.dbOperations.getCourseById(id, res);
+})
+
+app.get("/getReviewsByCourseKey", (req, res) => ***REMOVED***
+    const key=req.query.key
+    firebase.dbOperations.getReviewsByCourseKey(key, res);
+})
+
+
+
 
 app.post('/addCourse', jsonParser, (req, res) => ***REMOVED***
-    console.log(req.body)
-    const testObj = ***REMOVED***
-        "country": "italia",
-        "city": "torino",
-        "university": "politecnico di torino",
-        "name": "digital electronics",
-        "code": "02MIVOQ",
-        "modality": ["skriftlig", "muntlig"],
-        "semester": ["høst"],
-        "type": ["obligatorisk"],
-        "url": ["https://didattica.polito.it/pls/portal30/gap.pkg_guide.viewGap?p_cod_ins=02LQDOV&p_a_acc=2023&p_header=S&p_lang=IT&multi=N"],
-        "language": ["english"],
-        "equivalent": [ "TFE4141"]
-  ***REMOVED***
     firebase.dbOperations.addCourse(req.body).then(key => ***REMOVED***
         res.send(***REMOVED***"key":key, "success": true})
   ***REMOVED***)
 })
+
+app.post('/addReview', jsonParser, (req,res) => ***REMOVED***
+    firebase.dbOperations.addReview(req.body).then(key => ***REMOVED***
+        res.send(***REMOVED***"success": true})
+  ***REMOVED***)
+})
+
 
 
 

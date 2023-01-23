@@ -1,4 +1,7 @@
-import React from "react";
+import React, ***REMOVED***useState, useEffect, useReducer} from "react";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
 
 //Obs - closer to normal JS, should use sideeffects and states instead of all this. I dont know react!
 const d = new Date();
@@ -7,7 +10,6 @@ const currYear = d.getFullYear().toString();
 const currSem = currMonth<4 ? "v" : "h";
 
 //Localstorage om vi har lagt til land, by og studiested tidligere
-
 
 
 const semesters = ["h30","v30","h29","v29","h28","v28","h27","v27","h26","v26","h25","v25","h24","v24","h23","v23","h22","v22","h21","v21","h20","v20","h19","v19","h18","v18"]
@@ -140,6 +142,7 @@ async function getFormData(course, review)***REMOVED***
     if(e instanceof TypeError) ***REMOVED***
       review.type = []
       course.type = [""]
+      valid = 0;
   ***REMOVED***
 ***REMOVED***
 
@@ -157,6 +160,7 @@ async function getFormData(course, review)***REMOVED***
 ***REMOVED***
   catch(e)***REMOVED***
     if(e instanceof TypeError) ***REMOVED***
+      valid = 0;
       review.difficulty = null;
   ***REMOVED***
 ***REMOVED***
@@ -167,6 +171,7 @@ async function getFormData(course, review)***REMOVED***
   catch(e)***REMOVED***
     if(e instanceof TypeError) ***REMOVED***
       review.relevance = null;
+      valid = 0;
   ***REMOVED***
 ***REMOVED***
 
@@ -176,6 +181,7 @@ async function getFormData(course, review)***REMOVED***
   catch(e)***REMOVED***
     if(e instanceof TypeError) ***REMOVED***
       review.enjoyment = null;
+      valid = 0;
   ***REMOVED***
 ***REMOVED***
 
@@ -185,14 +191,14 @@ async function getFormData(course, review)***REMOVED***
 ***REMOVED*** else ***REMOVED***
     review.comment=comment;
 ***REMOVED***
-
-
   return valid;
 }
 
 
-async function verifyReview(course)***REMOVED***
-  //checkk if we have reviewed or not!
+async function verifyReview(review)***REMOVED***
+  if(review.semester=='noChoice' && review.type.length==0 && review.equivalent.length==0 && review.difficulty==null && review.relevance == null && review.enjoymen == null && review.comment ==null) ***REMOVED***
+    return false
+***REMOVED***
   return true;
 }
 
@@ -207,62 +213,101 @@ async function addCourse(obj)***REMOVED***
     body: JSON.stringify(obj)
 ***REMOVED***)
   const data = await fetchResponse.json()
- 
-    console.log(data);
-    return data; //Return id and success/not
+  console.log(data);
+  return data; //Return id and success/not
 }
 
-async function addReview(courseId, review)***REMOVED***
-
+async function addReview(key, review)***REMOVED***
+  const fetchResponse = await fetch('/addReview', ***REMOVED***
+    method: 'POST',
+    headers: ***REMOVED***
+      'Content-Type': 'application/json',
+  ***REMOVED***,
+    body: JSON.stringify(***REMOVED***"key": key, "review": review})
+***REMOVED***)
+  const data = await fetchResponse.json()
+  console.log(data);
+  return data; //Return success/not
 }
 
-
+var courseAddedInSession = 0;
 const handleButtonClick = () => ***REMOVED***
   var course = ***REMOVED***};
   var review = ***REMOVED***};
   getFormData(course, review)
   .then(valid => ***REMOVED***
-    if(valid)***REMOVED***
+    if(valid && courseAddedInSession == 0)***REMOVED***
       console.log("Valid!")
       //some wait icon
-      addCourse(course) //AddCourse lookes for dupes
+      addCourse(course) //AddCourse need to look for dupes
       .then(response => ***REMOVED***
         console.log(response)
         if(response.success)***REMOVED***
           console.log("Sucess!!!")
-        //Confirm correct/error
-          verifyReview(review) 
-          .then(valid =>***REMOVED***
-            if(valid) ***REMOVED***
-              /*addReview(courseId, review)
-              .then(response => ***REMOVED***
-                if(response.success)***REMOVED***
-                  displaySuccessWindow()
-              ***REMOVED***
-            ***REMOVED***)*/
-          ***REMOVED***
-        ***REMOVED***)
+          courseAddedInSession=1;
+          review.timestamp = d.getTime();
+          addReview(response.key, review);
       ***REMOVED***
-
     ***REMOVED***)
   ***REMOVED***
 ***REMOVED***)
   console.log(course)
   console.log(review)
-    //.then(verifyData(course))
-    //.then(addCourse(data))
-    //.then(/* hent id og legg til vurdering om det er lagt til!*/)
 }
 
 
 const NewCourses = () => ***REMOVED***
+  const [countryText, setCountryText] = useState(
+    localStorage.getItem('countryText') || '');
+  
+  const [cityText, setCityText] = useState(
+    localStorage.getItem('cityText') || '');
+    
+  const [universityText, setUniversityText] = useState(
+    localStorage.getItem('universityText') || '');
+
+  const [semesterChoice, setSemesterChoice] = useState(
+    localStorage.getItem('semesterChoice') || 'noChoice');
+      
+  useEffect(() => ***REMOVED***
+    localStorage.setItem('countryText', countryText)
+***REMOVED***, [countryText])
+
+  useEffect(() => ***REMOVED***
+    localStorage.setItem('cityText', cityText)
+***REMOVED***, [cityText])
+  
+  useEffect(() => ***REMOVED***
+    localStorage.setItem('universityText', universityText)
+***REMOVED***, [universityText])
+
+  useEffect(() => ***REMOVED***
+    localStorage.setItem('semesterChoice', semesterChoice)
+***REMOVED***, [semesterChoice])
+  
+  const handleCountryText = event => ***REMOVED***
+    setCountryText(event.target.value)
+***REMOVED***
+
+  const handleCityText = event => ***REMOVED***
+    setCityText(event.target.value)
+***REMOVED***
+
+  const handleUniversityText = event => ***REMOVED***
+    setUniversityText(event.target.value)
+***REMOVED***
+
+  const handleSemesterChoice = event => ***REMOVED***
+    setSemesterChoice(event.target.value)
+***REMOVED***
+  
   return (
     <div className="newCoursesContent">
       <h1 className="centerHeader">
         Legg til og vurder emne
       </h1>
       <p style=***REMOVED******REMOVED***width: "80%", margin:"0 auto", textAlign: "center"}}>
-        Hvis emnet allerede er lagt til i oversikten trenger du ikke legge det til igjen. Ønsker du å gi en vurdering av emnet eller legge til informasjon kan du gjøre det ved å trykke "les mer" i oversikten.
+        Hvis emnet allerede er lagt til i oversikten trenger du ikke legge det til igjen her. Ønsker du å gi en vurdering eller legge til informasjon til et eksisterende emne kan du gjøre det ved å trykke "les mer" i oversikten.
       </p>
       
         <hr/>
@@ -270,15 +315,15 @@ const NewCourses = () => ***REMOVED***
         <div className="mainCategories">
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="country">Land: </label>*<br></br>
-          <input className="mainCategoriesInput" list="countries" type='text' id="country" required placeholder="Italia, Frankrike, Tyskland, ..."></input>
+          <input className="mainCategoriesInput" value=***REMOVED***countryText} onChange=***REMOVED***handleCountryText} type='text' id="country" required placeholder="Italia, Frankrike, Tyskland, ..."></input>
         </div>
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="city">By: </label>*<br></br>
-          <input className="mainCategoriesInput" type='text' id='city' required placeholder="Wien, Berlin, Roma, ..."></input>
+          <input className="mainCategoriesInput" type='text' value=***REMOVED***cityText} onChange=***REMOVED***handleCityText} id='city' required placeholder="Wien, Berlin, Roma, ..."></input>
         </div>
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="university">Studiested: </label>*<br></br>
-          <input className="mainCategoriesInput" type='text' id='university' required placeholder="MIT, KTH, OsloMet, ..."></input>
+          <input className="mainCategoriesInput" type='text' value=***REMOVED***universityText} onChange=***REMOVED***handleUniversityText} id='university' required placeholder="MIT, KTH, OsloMet, ..."></input>
           
         </div>
       </div>
@@ -335,27 +380,26 @@ const NewCourses = () => ***REMOVED***
       </div>
       <div>
         <hr/>
-        <h2 className="centerHeader">Vurdering (valgfritt)</h2>
+        <h2 className="centerHeader">Vurdering</h2>
         <div className="vurderingDiv">
           <div className="courseField">
-            <label className="courseLabel">Når hadde du emnet?</label><br></br>
-            <select className="semChoice" name="reviewSemester" id="semChoice">
-              <option disabled selected value="noChoice">Velg semester</option>
+            <label className="courseLabel">Når hadde du emnet? </label>*<br></br>
+            <select className="semChoice" onChange=***REMOVED***handleSemesterChoice} defaultValue=***REMOVED***semesterChoice} name="reviewSemester" id="semChoice">
+              <option disabled  value="noChoice">Velg semester</option>
               ***REMOVED***filteredSemesters.map(sem => ***REMOVED***
-                return(<option value=***REMOVED***sem}>***REMOVED***sem}</option>)
+                return(<option key=***REMOVED***sem} value=***REMOVED***sem}>***REMOVED***sem}</option>)
             ***REMOVED***)}
             </select>
           </div>
 
           <div className="courseField">
-              <label className="courseLabel">Hva slags type fag ble emnet godkjent som? </label><br></br>
-              <div className="fagtypeOptions">
+              <label className="courseLabel">Hva slags type fag ble emnet godkjent som? </label>*<br></br>
+              <div className="fagtypeOptions" >
                 <div><label htmlFor="typeO">Obligatorisk</label><input type="radio" name="type" id="typeO" value="obligatorisk"></input></div>
                 <div><label htmlFor="typeV">Valgfag</label><input type="radio" name="type" id="typeV" value="valgfag"></input></div>
                 <div><label htmlFor="typeK">K-emne</label><input type="radio" name="type" id="typeK" value="kemne"></input></div>
                 <div><label htmlFor="typeIAS">Ingeniørfag annet studieprogram</label><input type="radio" name="type" id="typeIAS" value="ias"></input></div>
                 <div><label htmlFor="typeA">Annet/Ikke viktig</label><input  type="radio" name="type" id="annet" value="a"></input></div>
-
               </div>
             </div>
 
@@ -367,7 +411,7 @@ const NewCourses = () => ***REMOVED***
             </div>
 
           <div className="courseField">
-              <label className="courseLabel">Hvor vanskelig var emnet?: </label><br></br>
+              <label className="courseLabel">Hvor vanskelig var emnet?: </label>*<br></br>
               <div className="rate">
                 <input type="radio" id="star5_difficulty" name="rate_difficulty" value="5" />
                 <label htmlFor="star5_difficulty" title="text">5 stars</label>
@@ -383,7 +427,7 @@ const NewCourses = () => ***REMOVED***
             </div>
 
             <div className="courseField">
-              <label className="courseLabel">Hvor relevant var emnet? </label><br></br>
+              <label className="courseLabel">Hvor relevant var emnet? </label>*<br></br>
               <div className="rate">
                 <input type="radio" id="star5_relevance" name="rate_relevance" value="5" />
                 <label htmlFor="star5_relevance" title="text">5 stars</label>
@@ -399,7 +443,7 @@ const NewCourses = () => ***REMOVED***
             </div>
 
             <div className="courseField">
-              <label className="courseLabel">Hvor godt likte du emnet?: </label><br></br>
+              <label className="courseLabel">Hvor godt likte du emnet?: </label>*<br></br>
               <div className="rate">
                 <input type="radio" id="star5_enjoyment" name="rate_enjoyment" value="5" />
                 <label htmlFor="star5_enjoyment" title="text">5 stars</label>

@@ -20,6 +20,10 @@ h1 ***REMOVED***
 tr, th ***REMOVED***
   text-align: center;
 }
+td ***REMOVED***
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
 
 td, th ***REMOVED***
   padding-right: 10px;
@@ -46,7 +50,7 @@ tr ***REMOVED***
   margin: 0 auto;
 }
 
-input ***REMOVED***
+input, select ***REMOVED***
   margin-right: 10px;
   margin-left: 10px
 }
@@ -191,6 +195,34 @@ input.error:invalid***REMOVED***
   margin-left: 50px;
 }
 
+.reviewsDiv ***REMOVED***
+  width: 80%;
+  margin: 0 auto;
+  max-width: 950px;
+}
+
+.review ***REMOVED***
+  border: 1px solid grey;
+  padding:5px;
+  margin-bottom: 20px;
+}
+
+.reviewInfo ***REMOVED***
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  min-width: 300px;
+}
+
+.starRatings ***REMOVED***
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  min-width: 300px;
+}
+
+
+
 
 
 
@@ -232,3 +264,29 @@ input.error:invalid***REMOVED***
   color: #c59b08;
 }
 
+.averageDiv > p***REMOVED***
+ margin-left: 25px;
+ margin-top: 10px;
+}
+
+.averageDiv > h3 ***REMOVED***
+  margin-bottom: 10px;
+}
+
+.reviewInfo  > p***REMOVED***
+  line-height: 150%;
+}
+
+.starR > span ***REMOVED***
+  font-size: 25px;
+  line-height: "150%";
+}
+
+
+.starYellow ***REMOVED***
+  color: #ffc700;    
+}
+
+.starGrey ***REMOVED***
+  color:#ccc;
+}

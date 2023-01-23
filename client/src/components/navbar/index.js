@@ -8,16 +8,16 @@ return (
 <>
   <Nav>
     <NavMenu>
-      <NavLink to="/" activeStyle>
+      <NavLink to="/" activestyle="true">
         OmegaUtveksling
       </NavLink>
-      <NavLink to="/overview" activeStyle>
+      <NavLink to="/overview" activestyle="true">
         Oversikt
       </NavLink>
-      <NavLink to="/newCourses" activeStyle>
+      <NavLink to="/newCourses" activestyle="true">
         Legg til emner
       </NavLink>
-      <NavLink to="/about" activeStyle>
+      <NavLink to="/about" activestyle="true">
         Om
       </NavLink>
     </NavMenu>

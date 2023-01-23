@@ -20,6 +20,20 @@ const dbOperations=***REMOVED***
             res.status(200).json(***REMOVED***"data":snap.val()});
       ***REMOVED***)
   ***REMOVED***,
+    getCourseById(id, res) ***REMOVED***
+        courseRef
+        .child(id)
+        .once("value", function(snap)***REMOVED***
+            res.status(200).json(***REMOVED***"course": snap.val()});
+      ***REMOVED***)
+  ***REMOVED***,
+    getReviewsByCourseKey(key,res) ***REMOVED***
+        reviewRef
+        .child(key)
+        .once("value", function(snap)***REMOVED***
+            res.status(200).json(***REMOVED***"data": snap.val()});
+      ***REMOVED***)
+  ***REMOVED***,
     async addCourse(obj, res)***REMOVED***
         //Also add country and city to respective references!  (Makes adding more easier)
         //Verify that course is not made already
@@ -28,10 +42,10 @@ const dbOperations=***REMOVED***
         return key;
   ***REMOVED***,
     async addReview(obj,res) ***REMOVED***
-        newReview = reviewRef.push(obj);
-        key=newCourse.getKey()
-        return key;
-  ***REMOVED***
+        course = reviewRef.child(obj.key);
+        newReview = course.push(obj.review); //Endre denne til å bruke key som child av review så vi får reviews-courseKey-[x,y,z]
+  ***REMOVED***,
+    
     
 }
 //Update addCourse to something like this ( handle dupes)

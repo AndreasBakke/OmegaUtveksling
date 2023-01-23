@@ -50,8 +50,7 @@ const CoursesList = (***REMOVED***courses, handleRemoveCourse}) => ***REMOVED***
             <td>***REMOVED***titleCase(course.university)}</td>
             <td>***REMOVED***titleCase(course.name)}</td>
             <td>***REMOVED***course.equivalent.join(", ").toUpperCase()}</td>
-            <td><a href=***REMOVED***course.url}>Les mer</a></td>
-            <br/><br/>
+            <td><a href=***REMOVED***"course/"+course.id}>Les mer</a></td>
           </tr>
         );
     ***REMOVED***)}
