@@ -6,123 +6,123 @@ const currYear = d.getFullYear().toString();
 const currSem = currMonth<4 ? "v" : "h";
 const semesters = ["h30","v30","h29","v29","h28","v28","h27","v27","h26","v26","h25","v25","h24","v24","h23","v23","h22","v22","h21","v21","h20","v20","h19","v19","h18","v18"]
 
-const filteredSemesters = semesters.filter(semester => ***REMOVED***
+const filteredSemesters = semesters.filter(semester => {
 	return currSem == "v" ?  parseInt(semester.slice(-2)) <currYear.slice(-2) :  parseInt(semester.slice(-2))<currYear.slice(-2) || ( parseInt(semester.slice(-2))==currYear.slice(-2) && semester.slice(0,1) =="v");
 })
 
-async function getFormData(review) ***REMOVED***
+async function getFormData(review) {
     var valid = 1;
   const reviewSemester = document.querySelector('select[name="reviewSemester"]').value;
   review.semester = reviewSemester;
-    try***REMOVED***
+    try{
     const type = document.querySelector('input[name="type"]:checked').value;
     review.type = [type]
-  ***REMOVED***
-    catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+    }
+    catch(e){
+    if(e instanceof TypeError) {
         review.type = []
         valid = 0;
-  ***REMOVED***
-  ***REMOVED***
+    }
+    }
 
     const equivalent = document.querySelector("input[id='equivalent']").value;
-    if (equivalent.trim() =="") ***REMOVED***
+    if (equivalent.trim() =="") {
     review.equivalent=[];
-  ***REMOVED*** else ***REMOVED***
+    } else {
     review.equivalent=equivalent.trim().replace(", ", ",").split(",");
-  ***REMOVED***
+    }
 
-    try***REMOVED***
+    try{
     review.difficulty = document.querySelector('input[name="rate_difficulty"]:checked').value;
-  ***REMOVED***
-    catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+    }
+    catch(e){
+    if(e instanceof TypeError) {
         valid = 0;
         review.difficulty = null;
-  ***REMOVED***
-  ***REMOVED***
+    }
+    }
 
-    try***REMOVED***
+    try{
     review.relevance = document.querySelector('input[name="rate_relevance"]:checked').value;
-  ***REMOVED***
-    catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+    }
+    catch(e){
+    if(e instanceof TypeError) {
         review.relevance = null;
         valid = 0;
-  ***REMOVED***
-  ***REMOVED***
+    }
+    }
 
-    try***REMOVED***
+    try{
     review.enjoyment = document.querySelector('input[name="rate_enjoyment"]:checked').value;
-  ***REMOVED***
-    catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+    }
+    catch(e){
+    if(e instanceof TypeError) {
         review.enjoyment = null;
         valid = 0;
-  ***REMOVED***
-  ***REMOVED***
+    }
+    }
 
     const comment = document.querySelector("input[id='comment']").value;
-    if (comment.trim() =="") ***REMOVED***
+    if (comment.trim() =="") {
     review.comment=null;
-  ***REMOVED*** else ***REMOVED***
+    } else {
     review.comment=comment;
-  ***REMOVED***
+    }
     return valid;
 }
 
-async function addReview(key, review)***REMOVED***
-    const fetchResponse = await fetch('/addReview', ***REMOVED***
+async function addReview(key, review){
+    const fetchResponse = await fetch('/addReview', {
       method: 'POST',
-      headers: ***REMOVED***
+      headers: {
         'Content-Type': 'application/json',
-    ***REMOVED***,
-      body: JSON.stringify(***REMOVED***"key": key, "review": review})
-  ***REMOVED***)
+      },
+      body: JSON.stringify({"key": key, "review": review})
+    })
     const data = await fetchResponse.json()
     console.log(data);
     return data; //Return success/not
-***REMOVED***
+  }
   
 
 
-const NewReview = (***REMOVED***showPopup, handleCloseButton, courseKey}) => ***REMOVED***
+const NewReview = ({showPopup, handleCloseButton, courseKey}) => {
 
-    const handleSendReview = () => ***REMOVED***
+    const handleSendReview = () => {
         console.log("test")
-        var review = ***REMOVED***};
+        var review = {};
         getFormData(review)
-        .then(valid => ***REMOVED***
-            if(valid) ***REMOVED***
+        .then(valid => {
+            if(valid) {
                 console.log("valid!")
                 addReview(courseKey, review)
-                .then(response => ***REMOVED***
-                    if(response.success) ***REMOVED***
+                .then(response => {
+                    if(response.success) {
                         //Update course
                         window.location.reload();
-                  ***REMOVED***
-              ***REMOVED***)
-          ***REMOVED*** else ***REMOVED***
+                    }
+                })
+            } else {
                 document.getElementById("feilInfo").style.visibility="visible";
-          ***REMOVED***
-      ***REMOVED***)
+            }
+        })
         console.log(review)
-  ***REMOVED***
+    }
     return (
-    <div className="newReviewPopup" style=***REMOVED******REMOVED***display: showPopup ? "block" :"none"}}>
+    <div className="newReviewPopup" style={{display: showPopup ? "block" :"none"}}>
         <div className="popupContent" >
-            <span class="close" onClick=***REMOVED***handleCloseButton}>&times;</span>
+            <span class="close" onClick={handleCloseButton}>&times;</span>
             <h2 className="popupHeader">Legg til ny vurdering</h2>
             <hr></hr>
             <div className="popupBody">
             <div className="vurderingDiv">
           <div className="courseField">
             <label className="courseLabel">Når hadde du emnet? </label>*<br></br>
-            <select className="semChoice" defaultValue=***REMOVED***'noChoice'} name="reviewSemester" id="semChoice">
+            <select className="semChoice" defaultValue={'noChoice'} name="reviewSemester" id="semChoice">
               <option disabled  value="noChoice">Velg semester</option>
-              ***REMOVED***filteredSemesters.map(sem => ***REMOVED***
-                return(<option key=***REMOVED***sem} value=***REMOVED***sem}>***REMOVED***sem}</option>)
-            ***REMOVED***)}
+              {filteredSemesters.map(sem => {
+                return(<option key={sem} value={sem}>{sem}</option>)
+              })}
             </select>
           </div>
 
@@ -195,11 +195,11 @@ const NewReview = (***REMOVED***showPopup, handleCloseButton, courseKey}) => ***
               <label className="courseLabel" htmlFor="comment">Kommentarer om emnet:</label><br></br>
               <input type="text" className="courseTextInput" id="comment" placeholder="Flink professor? Spesielle forkunnskaper?"></input>
             </div>
-            <div id="feilInfo" style=***REMOVED******REMOVED***textAlign: "center", marginBottom: "10px", color: "darkred", visibility: "hidden"}}>
+            <div id="feilInfo" style={{textAlign: "center", marginBottom: "10px", color: "darkred", visibility: "hidden"}}>
               Noe gikk galt! Sjekk at du har fylt ut alle felt med *, eller prøv igjen senere!
             </div>
             <div className="buttonDiv">
-              <button className="addCourseBtn" onClick=***REMOVED***handleSendReview} >Legg til vurdering</button>
+              <button className="addCourseBtn" onClick={handleSendReview} >Legg til vurdering</button>
             </div>
         </div>
             </div>

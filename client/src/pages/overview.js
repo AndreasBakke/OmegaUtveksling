@@ -1,38 +1,38 @@
-import React, ***REMOVED***useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import CoursesList from '../components/CoursesList';
 import FilterBar from '../components/FilterBar';
 
 
-const coursesReducer = (state, action) => ***REMOVED***
-  switch(action.type) ***REMOVED***
+const coursesReducer = (state, action) => {
+  switch(action.type) {
     case 'FETCH_COURSES_START':
-      return ***REMOVED***
+      return {
         ...state,
         isLoading: true
-    ***REMOVED***;
+      };
     case 'FETCH_COURSES_SUCCESS':
-      return ***REMOVED***
+      return {
         ...state,
         isLoading: false,
         data: action.payload
-    ***REMOVED***;
+      };
     case 'REMOVE_COURSE':
-      return ***REMOVED***
+      return {
         ...state,
         data: state.filter(
         course => action.payload.id !== course.id
         )
-    ***REMOVED***;
+      };
     default: 
       throw new Error();
-***REMOVED***
+  }
 };
 
 
 
 
 
-const Overview = () => ***REMOVED***
+const Overview = () => {
     const [searchText, setSearchText] = useState(
         localStorage.getItem('searchText') || '');
     
@@ -44,79 +44,79 @@ const Overview = () => ***REMOVED***
 
     const [courses, dispatchCourses] = useReducer(
         coursesReducer,
-        ***REMOVED***data: [], isLoading: false}
+        {data: [], isLoading: false}
     );
   
   const [isLoading, setIsLoading] =useState(false);
 
-  useEffect(() => ***REMOVED***
-    dispatchCourses(***REMOVED***type: 'FETCH_COURSES_START'});
+  useEffect(() => {
+    dispatchCourses({type: 'FETCH_COURSES_START'});
     fetch("/getCourses")
       .then(response => response.json())
       .then(
-        result => ***REMOVED***
+        result => {
           var array = [];
           var data = result.data;
-          for(var key in data) ***REMOVED***
+          for(var key in data) {
             var course = data[key];
             course.id=key;
             array.push(course);
-        ***REMOVED***
-          dispatchCourses(***REMOVED***
+          }
+          dispatchCourses({
             type: 'FETCH_COURSES_SUCCESS',
             payload: array
-        ***REMOVED***);
-      ***REMOVED***
+          });
+        }
       )
       .catch((e) => console.log("error fetching courses " + e))
-***REMOVED***, []);
+  }, []);
 
-  useEffect(()=> ***REMOVED***
+  useEffect(()=> {
       localStorage.setItem('searchText', searchText)
-***REMOVED***, [searchText]); //function runs every time any of the state variables within [] is updated (here only searchtext)
+  }, [searchText]); //function runs every time any of the state variables within [] is updated (here only searchtext)
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('courseType', courseType)
-***REMOVED***, [courseType]);
+  }, [courseType]);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('semesterValue', semesterValue)
-***REMOVED***, [semesterValue]);
+  }, [semesterValue]);
 
-  const filteredCourses = courses.data.filter(course => ***REMOVED***
+  const filteredCourses = courses.data.filter(course => {
     return (courseType == "all" || course.type.join(" ").includes(courseType)) && (semesterValue == "begge" || course.semester.join(" ").includes(semesterValue)) && (course.country.toLowerCase().includes(searchText.toLowerCase()) || course.city.toLowerCase().includes(searchText.toLowerCase())  || course.university.toLowerCase().includes(searchText.toLowerCase())  || course.name.toLowerCase().includes(searchText.toLowerCase()) || course.equivalent.join(" ").toLowerCase().includes(searchText.toLowerCase()))
-***REMOVED***);
+  });
 
 
     //filtrering kan senere gjøres noe sånn. men med state som har value og asc/dec for hva som skal filtreres
-  filteredCourses.sort((a,b) => ***REMOVED***
-    if(a.country < b.country)***REMOVED***
+  filteredCourses.sort((a,b) => {
+    if(a.country < b.country){
       return -1;
-  ***REMOVED***
-***REMOVED***)
+    }
+  })
 
-  const handleSearch = event => ***REMOVED***
+  const handleSearch = event => {
     setSearchText(event.target.value);
-***REMOVED***;
+  };
 
-  const handleCourseTypeChange = event => ***REMOVED***
+  const handleCourseTypeChange = event => {
     setCourseType(event.target.value);
-***REMOVED***
+  }
 
-  const handleSemesterChoiceChange =event => ***REMOVED***
+  const handleSemesterChoiceChange =event => {
     setSemesterValue(event.target.value);
-***REMOVED***
+  }
 
   
   return (
     <div id='overviewContent'>
-    ***REMOVED***/*<h2 onClick=***REMOVED***addCourse}>test</h2>*/}
+    {/*<h2 onClick={addCourse}>test</h2>*/}
     <h1 className='centerHeader'>Oversikt over emner</h1>
     <br/>
-        <FilterBar searchValue=***REMOVED***searchText} courseTypeValue=***REMOVED***courseType} courseSemesterValue=***REMOVED***semesterValue} onSearch=***REMOVED***handleSearch} onTypeChange=***REMOVED***handleCourseTypeChange} onSemesterChange=***REMOVED***handleSemesterChoiceChange}/>
-        ***REMOVED***courses.isLoading ? (<p>Laster inn fag..</p>) : 
-        (<CoursesList courses=***REMOVED***filteredCourses}/>)
-      ***REMOVED***
+        <FilterBar searchValue={searchText} courseTypeValue={courseType} courseSemesterValue={semesterValue} onSearch={handleSearch} onTypeChange={handleCourseTypeChange} onSemesterChange={handleSemesterChoiceChange}/>
+        {courses.isLoading ? (<p>Laster inn fag..</p>) : 
+        (<CoursesList courses={filteredCourses}/>)
+        }
     
   </div>
   ); 

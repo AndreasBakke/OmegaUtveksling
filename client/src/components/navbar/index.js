@@ -1,9 +1,9 @@
 //NavigationBar
 import React from "react";
-import ***REMOVED*** Nav, NavLink, NavMenu } 
+import { Nav, NavLink, NavMenu } 
 from "./NavbarElements.js";
 
-const Navbar = () => ***REMOVED***
+const Navbar = () => {
 return (
 <>
   <Nav>

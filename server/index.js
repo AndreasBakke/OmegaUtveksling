@@ -7,7 +7,7 @@ var jsonParser = bodyParser.json();
 const servercalls = require("./servercalls")
 
 const courses_data = [
-  ***REMOVED***
+  {
     id: 1,
     country: "Italia",
     city: "Torino",
@@ -16,8 +16,8 @@ const courses_data = [
     equivalent: ["TFE4141"],
     type: ["obligatorisk", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,
-  ***REMOVED***
+  },
+  {
     id: 2,
     country: "Italia",
     city: "Torino",
@@ -26,7 +26,7 @@ const courses_data = [
     equivalent: ["Test1", "Test2", "Test2", "Test2", "Test2", "Test2", "Test2", "Test2"],
     type: ["obligatorisk", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,***REMOVED***
+  },{
     id: 3,
     country: "Italia",
     city: "Milano",
@@ -35,38 +35,38 @@ const courses_data = [
     equivalent: [""],
     type: ["k-emne", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,
+  },
   
 ];
 
-app.use(function (req, res, next) ***REMOVED***
+app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
   next();
 });
 
-app.get("/courses", (req, res) => ***REMOVED***
+app.get("/courses", (req, res) => {
   res.json(courses_data);
 });
 
-app.get('/getCourses', (req, res) => ***REMOVED***
+app.get('/getCourses', (req, res) => {
   servercalls.getAllCourses()
-  .then(response => ***REMOVED***
+  .then(response => {
     res.json(response);
-***REMOVED***)
-  .catch(error => ***REMOVED***
+  })
+  .catch(error => {
     console.log(error);
-***REMOVED***)
+  })
 })
 
 
-app.post("/addCourse",jsonParser,(req, res) => ***REMOVED***
+app.post("/addCourse",jsonParser,(req, res) => {
   console.log(req.body);
   servercalls.addCourse(req.body);
 });
 
 
-app.listen(PORT, () => ***REMOVED***
-  console.log(`Server listening on $***REMOVED***PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
 });

@@ -4,11 +4,11 @@ const app = express();
 
 const firebase = require("./firebase.js")
 var bodyParser = require('body-parser');
-const ***REMOVED*** json } = require("body-parser");
+const { json } = require("body-parser");
 var jsonParser = bodyParser.json();
 
 const courses_data = [
-  ***REMOVED***
+  {
     id: 1,
     country: "Italia",
     city: "Torino",
@@ -17,8 +17,8 @@ const courses_data = [
     equivalent: ["TFE4141"],
     type: ["obligatorisk", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,
-  ***REMOVED***
+  },
+  {
     id: 2,
     country: "Italia",
     city: "Torino",
@@ -27,7 +27,7 @@ const courses_data = [
     equivalent: ["Test1", "Test2", "Test2", "Test2", "Test2", "Test2", "Test2", "Test2"],
     type: ["obligatorisk", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,***REMOVED***
+  },{
     id: 3,
     country: "Italia",
     city: "Milano",
@@ -36,29 +36,29 @@ const courses_data = [
     equivalent: [""],
     type: ["k-emne", "valgfag"],
     url: "https://codingthesmartway.com/courses/react-complete-guide/"
-***REMOVED***,
+  },
   
 ];
 
-app.use(function (req, res, next) ***REMOVED***
+app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
   next();
 });
 
-app.get("/courses", (req, res) => ***REMOVED***
+app.get("/courses", (req, res) => {
   res.json(courses_data);
 });
-app.get("/getCourses", (req, res) => ***REMOVED***
+app.get("/getCourses", (req, res) => {
     firebase.dbOperations.getAllCourses(res);
 });
-app.get("/getCourseById", (req, res) => ***REMOVED***
+app.get("/getCourseById", (req, res) => {
     const id=req.query.id
     firebase.dbOperations.getCourseById(id, res);
 })
 
-app.get("/getReviewsByCourseKey", (req, res) => ***REMOVED***
+app.get("/getReviewsByCourseKey", (req, res) => {
     const key=req.query.key
     firebase.dbOperations.getReviewsByCourseKey(key, res);
 })
@@ -66,22 +66,22 @@ app.get("/getReviewsByCourseKey", (req, res) => ***REMOVED***
 
 
 
-app.post('/addCourse', jsonParser, (req, res) => ***REMOVED***
-    firebase.dbOperations.addCourse(req.body).then(key => ***REMOVED***
-        res.send(***REMOVED***"key":key, "success": true})
-  ***REMOVED***)
+app.post('/addCourse', jsonParser, (req, res) => {
+    firebase.dbOperations.addCourse(req.body).then(key => {
+        res.send({"key":key, "success": true})
+    })
 })
 
-app.post('/addReview', jsonParser, (req,res) => ***REMOVED***
-    firebase.dbOperations.addReview(req.body).then(key => ***REMOVED***
-        res.send(***REMOVED***"success": true})
-  ***REMOVED***)
+app.post('/addReview', jsonParser, (req,res) => {
+    firebase.dbOperations.addReview(req.body).then(key => {
+        res.send({"success": true})
+    })
 })
 
 
 
 
 
-app.listen(PORT, () => ***REMOVED***
-  console.log(`Server listening on $***REMOVED***PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
 });

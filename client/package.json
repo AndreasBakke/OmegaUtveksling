@@ -1,8 +1,8 @@
-***REMOVED***
+{
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "dependencies": ***REMOVED***
+  "dependencies": {
     "@mui/styled-engine-sc": "^5.11.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,21 +14,21 @@
     "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
-***REMOVED***,
-  "scripts": ***REMOVED***
+  },
+  "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-***REMOVED***,
+  },
   "proxy": "http://localhost:3001",
-  "eslintConfig": ***REMOVED***
+  "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
-***REMOVED***,
-  "browserslist": ***REMOVED***
+  },
+  "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
@@ -39,5 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-***REMOVED***
+  }
 }

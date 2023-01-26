@@ -1,6 +1,6 @@
 import React from "react";
   
-const Home = () => ***REMOVED***
+const Home = () => {
   return (
     <div>
       <h1>

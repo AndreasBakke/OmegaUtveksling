@@ -2,7 +2,7 @@ const admin = require("firebase-admin");
 
 const serviceAccount = require("./admin.json");
 
-admin.initializeApp(***REMOVED***
+admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://omegautveksling-5df30-default-rtdb.europe-west1.firebasedatabase.app"
 });
@@ -14,66 +14,66 @@ var uniRef =db.ref("universities");
 var courseRef =db.ref("courses");
 var reviewRef = db.ref("reviews")
 
-const dbOperations=***REMOVED***
-    getAllCourses(res) ***REMOVED***
-        courseRef.once('value', function(snap)***REMOVED***
-            res.status(200).json(***REMOVED***"data":snap.val()});
-      ***REMOVED***)
-  ***REMOVED***,
-    getCourseById(id, res) ***REMOVED***
+const dbOperations={
+    getAllCourses(res) {
+        courseRef.once('value', function(snap){
+            res.status(200).json({"data":snap.val()});
+        })
+    },
+    getCourseById(id, res) {
         courseRef
         .child(id)
-        .once("value", function(snap)***REMOVED***
-            res.status(200).json(***REMOVED***"course": snap.val()});
-      ***REMOVED***)
-  ***REMOVED***,
-    getReviewsByCourseKey(key,res) ***REMOVED***
+        .once("value", function(snap){
+            res.status(200).json({"course": snap.val()});
+        })
+    },
+    getReviewsByCourseKey(key,res) {
         reviewRef
         .child(key)
-        .once("value", function(snap)***REMOVED***
-            res.status(200).json(***REMOVED***"data": snap.val()});
-      ***REMOVED***)
-  ***REMOVED***,
-    async addCourse(obj, res)***REMOVED***
+        .once("value", function(snap){
+            res.status(200).json({"data": snap.val()});
+        })
+    },
+    async addCourse(obj, res){
         //Also add country and city to respective references!  (Makes adding more easier)
         //Verify that course is not made already
         newCourse = courseRef.push(obj);
         key=newCourse.getKey()
         return key;
-  ***REMOVED***,
-    async addReview(obj,res) ***REMOVED***
+    },
+    async addReview(obj,res) {
         course = reviewRef.child(obj.key);
         newReview = course.push(obj.review); //Endre denne til å bruke key som child av review så vi får reviews-courseKey-[x,y,z]
-  ***REMOVED***,
+    },
     
 }
 //Update addCourse to something like this ( handle dupes)
 /*
-async function createUser(user: User) ***REMOVED***
-    try ***REMOVED***
+async function createUser(user: User) {
+    try {
         const newDocRef = db.collection('Users').doc()
-        await db.runTransaction(async t => ***REMOVED***
+        await db.runTransaction(async t => {
             const checkRef = db.collection('Users')
                 .where('username', '==', user.username)
             const doc = await t.get(checkRef)
-            if (!doc.empty) ***REMOVED***
+            if (!doc.empty) {
                 throw new FirebaseError('firestore/unique-restriction',
-                    `There is already a user with the username: '$***REMOVED***user.username}' in the database.`
+                    `There is already a user with the username: '${user.username}' in the database.`
                 )
-          ***REMOVED***
+            }
             await t.create(newDocRef, user)
-      ***REMOVED***)
+        })
         console.log('User Created')
-  ***REMOVED*** catch (err) ***REMOVED***
-        if (err instanceof FirebaseError) ***REMOVED***
+    } catch (err) {
+        if (err instanceof FirebaseError) {
             console.log('Some error in firebase')
             //Do something
-      ***REMOVED*** else ***REMOVED***
+        } else {
             console.log('Another error')
             //Do whatever
-      ***REMOVED***
-  ***REMOVED***
+        }
+    }
 }*/
-module.exports = ***REMOVED***
+module.exports = {
     dbOperations
 }

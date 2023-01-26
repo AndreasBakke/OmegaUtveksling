@@ -1,22 +1,22 @@
 import React from 'react';
 
-function capitalizeFirstLetter(string) ***REMOVED***
+function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function titleCase(str) ***REMOVED***
+function titleCase(str) {
   var splitStr = str.toLowerCase().split(' ');
-  for (var i = 0; i < splitStr.length; i++) ***REMOVED***
+  for (var i = 0; i < splitStr.length; i++) {
       // You do not need to check if i is larger than splitStr length, as your for does that for you
       // Assign it back to the array
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-***REMOVED***
+  }
   // Directly return the joined string
   return splitStr.join(' '); 
 }
 
 
-const CoursesList = (***REMOVED***courses, handleRemoveCourse}) => ***REMOVED***
+const CoursesList = ({courses, handleRemoveCourse}) => {
     return (
     <table>
       <thead>
@@ -42,21 +42,21 @@ const CoursesList = (***REMOVED***courses, handleRemoveCourse}) => ***REMOVED***
         </tr>
       </thead>
       <tbody>
-      ***REMOVED***courses.map(course => ***REMOVED***
+      {courses.map(course => {
         return (
-          <tr key=***REMOVED***course.id}>
-            <td>***REMOVED***capitalizeFirstLetter(course.country)}</td>
-            <td>***REMOVED***capitalizeFirstLetter(course.city)}</td>
-            <td>***REMOVED***titleCase(course.university)}</td>
-            <td>***REMOVED***titleCase(course.name)}</td>
-            <td>***REMOVED***course.equivalent.join(", ").toUpperCase()}</td>
-            <td><a href=***REMOVED***"course/"+course.id}>Les mer</a></td>
+          <tr key={course.id}>
+            <td>{capitalizeFirstLetter(course.country)}</td>
+            <td>{capitalizeFirstLetter(course.city)}</td>
+            <td>{titleCase(course.university)}</td>
+            <td>{titleCase(course.name)}</td>
+            <td>{course.equivalent.join(", ").toUpperCase()}</td>
+            <td><a href={"course/"+course.id}>Les mer</a></td>
           </tr>
         );
-    ***REMOVED***)}
+      })}
       </tbody>
       </table>
     );
-***REMOVED***
+  }
   export default CoursesList;
   

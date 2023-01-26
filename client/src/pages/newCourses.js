@@ -1,4 +1,4 @@
-import React, ***REMOVED***useState, useEffect, useReducer} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -14,84 +14,84 @@ const currSem = currMonth<4 ? "v" : "h";
 
 const semesters = ["h30","v30","h29","v29","h28","v28","h27","v27","h26","v26","h25","v25","h24","v24","h23","v23","h22","v22","h21","v21","h20","v20","h19","v19","h18","v18"]
 
-const filteredSemesters = semesters.filter(semester => ***REMOVED***
+const filteredSemesters = semesters.filter(semester => {
 	return currSem == "v" ?  parseInt(semester.slice(-2)) <currYear.slice(-2) :  parseInt(semester.slice(-2))<currYear.slice(-2) || ( parseInt(semester.slice(-2))==currYear.slice(-2) && semester.slice(0,1) =="v");
 })
 
 document.getElementsByClassName("error")
 
 
-async function getFormData(course, review)***REMOVED***
+async function getFormData(course, review){
   var valid = 1;
   const country = document.querySelector("input[id='country']").value;
-  if (country.trim() =="") ***REMOVED***
+  if (country.trim() =="") {
     course.country=null;
     valid = 0;
     document.querySelector("input[id='country']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.country=country.toLowerCase()
-***REMOVED***
+  }
   
   const city = document.querySelector("input[id='city']").value;
-  if (city.trim() =="") ***REMOVED***
+  if (city.trim() =="") {
     course.city=null;
     valid = 0;
     document.querySelector("input[id='city']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.city=city.toLowerCase()
-***REMOVED***
+  }
   
   const university = document.querySelector("input[id='university']").value;
-  if (university.trim() =="") ***REMOVED***
+  if (university.trim() =="") {
     course.university=null;
     valid = 0;
     document.querySelector("input[id='university']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.university=university.toLowerCase()
-***REMOVED***
+  }
 
   const name = document.querySelector("input[id='name']").value;
-  if (name.trim() =="") ***REMOVED***
+  if (name.trim() =="") {
     course.name=null;
     valid = 0;
     document.querySelector("input[id='name']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.name=name.toLowerCase()
-***REMOVED***
+  }
   
   const code = document.querySelector("input[id='code']").value;
-  if (code.trim() =="") ***REMOVED***
+  if (code.trim() =="") {
     course.code=null;
     valid = 0;
     document.querySelector("input[id='code']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.code=code
-***REMOVED***
+  }
 
   const points = document.querySelector("input[id='points']").value;
-  if (points.trim() =="") ***REMOVED***
+  if (points.trim() =="") {
     course.points=null;
     valid = 0;
     document.querySelector("input[id='points']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.points=points
-***REMOVED***
+  }
 
   const semH = document.querySelector("input[id='semH']").checked;
   const semV = document.querySelector("input[id='semV']").checked;
   var sems = [];
-  if (semH) ***REMOVED***
+  if (semH) {
     sems.push("høst");
-***REMOVED***
-  if (semV) ***REMOVED***
+  }
+  if (semV) {
     sems.push("vår")
-***REMOVED***
+  }
   course.semester= sems;
   
   var mods = [];
@@ -99,164 +99,164 @@ async function getFormData(course, review)***REMOVED***
   const m = document.querySelector("input[id='vurderingM']").checked;
   const p = document.querySelector("input[id='vurderingP']").checked;
   const h = document.querySelector("input[id='vurderingH']").checked;
-  if(s)***REMOVED***
+  if(s){
     mods.push("skriftlig");
-***REMOVED***
-  if(m)***REMOVED***
+  }
+  if(m){
     mods.push("muntlig")
-***REMOVED***
-  if(p) ***REMOVED***
+  }
+  if(p) {
     mods.push("prosjekt")
-***REMOVED***
-  if(h) ***REMOVED***
+  }
+  if(h) {
     mods.push("hjemmeeksamen")
-***REMOVED***
+  }
   course.modality = mods;
 
   const language = document.querySelector("input[id='language']").value;
-  if (language.trim() =="") ***REMOVED***
+  if (language.trim() =="") {
     course.language=null;
     valid = 0;
     document.querySelector("input[id='language']").classList.add("error");
     ;
-***REMOVED*** else ***REMOVED***
+  } else {
     course.language=language.toLowerCase()
-***REMOVED***
+  }
   
   const url = document.querySelector("input[id='url']").value;
-  if (url.trim() =="") ***REMOVED***
+  if (url.trim() =="") {
     course.url=[];
-***REMOVED*** else ***REMOVED***
+  } else {
     course.url=[url];
-***REMOVED***
+  }
   
 
   const reviewSemester = document.querySelector('select[name="reviewSemester"]').value;
     review.semester = reviewSemester;
-  try***REMOVED***
+  try{
     const type = document.querySelector('input[name="type"]:checked').value;
     review.type = [type]
     course.type = [type]
-***REMOVED***
-  catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+  }
+  catch(e){
+    if(e instanceof TypeError) {
       review.type = []
       course.type = [""]
       valid = 0;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   const equivalent = document.querySelector("input[id='equivalent']").value;
-  if (equivalent.trim() =="") ***REMOVED***
+  if (equivalent.trim() =="") {
     review.equivalent=[];
     course.equivalent=[""];
-***REMOVED*** else ***REMOVED***
+  } else {
     review.equivalent=equivalent.trim().replace(", ", ",").split(",");
     course.equivalent=equivalent.trim().replace(", ", ",").split(",");
-***REMOVED***
+  }
 
-  try***REMOVED***
+  try{
     review.difficulty = document.querySelector('input[name="rate_difficulty"]:checked').value;
-***REMOVED***
-  catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+  }
+  catch(e){
+    if(e instanceof TypeError) {
       valid = 0;
       review.difficulty = null;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  try***REMOVED***
+  try{
     review.relevance = document.querySelector('input[name="rate_relevance"]:checked').value;
-***REMOVED***
-  catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+  }
+  catch(e){
+    if(e instanceof TypeError) {
       review.relevance = null;
       valid = 0;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  try***REMOVED***
+  try{
     review.enjoyment = document.querySelector('input[name="rate_enjoyment"]:checked').value;
-***REMOVED***
-  catch(e)***REMOVED***
-    if(e instanceof TypeError) ***REMOVED***
+  }
+  catch(e){
+    if(e instanceof TypeError) {
       review.enjoyment = null;
       valid = 0;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   const comment = document.querySelector("input[id='comment']").value;
-  if (comment.trim() =="") ***REMOVED***
+  if (comment.trim() =="") {
     review.comment=null;
-***REMOVED*** else ***REMOVED***
+  } else {
     review.comment=comment;
-***REMOVED***
+  }
   return valid;
 }
 
 
-async function verifyReview(review)***REMOVED***
-  if(review.semester=='noChoice' && review.type.length==0 && review.equivalent.length==0 && review.difficulty==null && review.relevance == null && review.enjoymen == null && review.comment ==null) ***REMOVED***
+async function verifyReview(review){
+  if(review.semester=='noChoice' && review.type.length==0 && review.equivalent.length==0 && review.difficulty==null && review.relevance == null && review.enjoymen == null && review.comment ==null) {
     return false
-***REMOVED***
+  }
   return true;
 }
 
-async function addCourse(obj)***REMOVED***
+async function addCourse(obj){
   //Only use if course does not exist
   //Fetch ...
-  const fetchResponse = await fetch('http://localhost:3001/addCourse',***REMOVED***
+  const fetchResponse = await fetch('http://localhost:3001/addCourse',{
     method: 'POST',
-    headers: ***REMOVED***
+    headers: {
       'Content-Type': 'application/json',
-  ***REMOVED***,
+    },
     body: JSON.stringify(obj)
-***REMOVED***)
+  })
   const data = await fetchResponse.json()
   console.log(data);
   return data; //Return id and success/not
 }
 
-async function addReview(key, review)***REMOVED***
-  const fetchResponse = await fetch('/addReview', ***REMOVED***
+async function addReview(key, review){
+  const fetchResponse = await fetch('/addReview', {
     method: 'POST',
-    headers: ***REMOVED***
+    headers: {
       'Content-Type': 'application/json',
-  ***REMOVED***,
-    body: JSON.stringify(***REMOVED***"key": key, "review": review})
-***REMOVED***)
+    },
+    body: JSON.stringify({"key": key, "review": review})
+  })
   const data = await fetchResponse.json()
   console.log(data);
   return data; //Return success/not
 }
 
 var courseAddedInSession = 0;
-const handleButtonClick = () => ***REMOVED***
-  var course = ***REMOVED***};
-  var review = ***REMOVED***};
+const handleButtonClick = () => {
+  var course = {};
+  var review = {};
   getFormData(course, review)
-  .then(valid => ***REMOVED***
-    if(valid && courseAddedInSession == 0)***REMOVED***
+  .then(valid => {
+    if(valid && courseAddedInSession == 0){
       addCourse(course) //AddCourse need to look for dupes
-      .then(response => ***REMOVED***
+      .then(response => {
         console.log(response)
-        if(response.success)***REMOVED***
+        if(response.success){
           console.log("Sucess!!!")
           courseAddedInSession=1;
           review.timestamp = d.getTime();
           addReview(response.key, review);
-      ***REMOVED*** 
-    ***REMOVED***)
-  ***REMOVED*** else ***REMOVED***
+        } 
+      })
+    } else {
       document.getElementById("feilInfo").style.visibility="visible";
-  ***REMOVED***
-***REMOVED***)
+    }
+  })
   console.log(course)
   console.log(review)
 }
 
 
-const NewCourses = () => ***REMOVED***
+const NewCourses = () => {
   const [countryText, setCountryText] = useState(
     localStorage.getItem('countryText') || '');
   
@@ -269,44 +269,44 @@ const NewCourses = () => ***REMOVED***
   const [semesterChoice, setSemesterChoice] = useState(
     localStorage.getItem('semesterChoice') || 'noChoice');
       
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('countryText', countryText)
-***REMOVED***, [countryText])
+  }, [countryText])
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('cityText', cityText)
-***REMOVED***, [cityText])
+  }, [cityText])
   
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('universityText', universityText)
-***REMOVED***, [universityText])
+  }, [universityText])
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     localStorage.setItem('semesterChoice', semesterChoice)
-***REMOVED***, [semesterChoice])
+  }, [semesterChoice])
   
-  const handleCountryText = event => ***REMOVED***
+  const handleCountryText = event => {
     setCountryText(event.target.value)
-***REMOVED***
+  }
 
-  const handleCityText = event => ***REMOVED***
+  const handleCityText = event => {
     setCityText(event.target.value)
-***REMOVED***
+  }
 
-  const handleUniversityText = event => ***REMOVED***
+  const handleUniversityText = event => {
     setUniversityText(event.target.value)
-***REMOVED***
+  }
 
-  const handleSemesterChoice = event => ***REMOVED***
+  const handleSemesterChoice = event => {
     setSemesterChoice(event.target.value)
-***REMOVED***
+  }
   
   return (
     <div className="newCoursesContent">
       <h1 className="centerHeader">
         Legg til og vurder emne
       </h1>
-      <p style=***REMOVED******REMOVED***width: "80%", margin:"0 auto", textAlign: "center"}}>
+      <p style={{width: "80%", margin:"0 auto", textAlign: "center"}}>
         Hvis emnet allerede er lagt til i oversikten trenger du ikke legge det til igjen her. Ønsker du å gi en vurdering eller legge til informasjon til et eksisterende emne kan du gjøre det ved å trykke "les mer" i oversikten.
       </p>
       
@@ -315,15 +315,15 @@ const NewCourses = () => ***REMOVED***
         <div className="mainCategories">
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="country">Land: </label>*<br></br>
-          <input className="mainCategoriesInput" value=***REMOVED***countryText} onChange=***REMOVED***handleCountryText} type='text' id="country" required placeholder="Italia, Frankrike, Tyskland, ..."></input>
+          <input className="mainCategoriesInput" value={countryText} onChange={handleCountryText} type='text' id="country" required placeholder="Italia, Frankrike, Tyskland, ..."></input>
         </div>
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="city">By: </label>*<br></br>
-          <input className="mainCategoriesInput" type='text' value=***REMOVED***cityText} onChange=***REMOVED***handleCityText} id='city' required placeholder="Wien, Berlin, Roma, ..."></input>
+          <input className="mainCategoriesInput" type='text' value={cityText} onChange={handleCityText} id='city' required placeholder="Wien, Berlin, Roma, ..."></input>
         </div>
         <div className="mainCategoriesDiv">
           <label className="mainCategoriesLabel" htmlFor="university">Studiested: </label>*<br></br>
-          <input className="mainCategoriesInput" type='text' value=***REMOVED***universityText} onChange=***REMOVED***handleUniversityText} id='university' required placeholder="MIT, KTH, OsloMet, ..."></input>
+          <input className="mainCategoriesInput" type='text' value={universityText} onChange={handleUniversityText} id='university' required placeholder="MIT, KTH, OsloMet, ..."></input>
           
         </div>
       </div>
@@ -384,11 +384,11 @@ const NewCourses = () => ***REMOVED***
         <div className="vurderingDiv">
           <div className="courseField">
             <label className="courseLabel">Når hadde du emnet? </label>*<br></br>
-            <select className="semChoice" onChange=***REMOVED***handleSemesterChoice} defaultValue=***REMOVED***semesterChoice} name="reviewSemester" id="semChoice">
+            <select className="semChoice" onChange={handleSemesterChoice} defaultValue={semesterChoice} name="reviewSemester" id="semChoice">
               <option disabled  value="noChoice">Velg semester</option>
-              ***REMOVED***filteredSemesters.map(sem => ***REMOVED***
-                return(<option key=***REMOVED***sem} value=***REMOVED***sem}>***REMOVED***sem}</option>)
-            ***REMOVED***)}
+              {filteredSemesters.map(sem => {
+                return(<option key={sem} value={sem}>{sem}</option>)
+              })}
             </select>
           </div>
 
@@ -461,11 +461,11 @@ const NewCourses = () => ***REMOVED***
               <label className="courseLabel" htmlFor="comment">Kommentarer om emnet:</label><br></br>
               <input type="text" className="courseTextInput" id="comment" placeholder="Flink professor? Spesielle forkunnskaper?"></input>
             </div>
-            <div id="feilInfo" style=***REMOVED******REMOVED***textAlign: "center", marginBottom: "10px", color: "darkred", visibility: "hidden"}}>
+            <div id="feilInfo" style={{textAlign: "center", marginBottom: "10px", color: "darkred", visibility: "hidden"}}>
               Noe gikk galt! Sjekk at du har fylt ut alle felt med *, eller prøv igjen senere!
             </div>
             <div className="buttonDiv">
-              <button className="addCourseBtn" onClick=***REMOVED***handleButtonClick}>Legg til emne</button>
+              <button className="addCourseBtn" onClick={handleButtonClick}>Legg til emne</button>
             </div>
         </div>
       </div>

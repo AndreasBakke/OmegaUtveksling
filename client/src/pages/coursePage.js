@@ -1,134 +1,134 @@
-import React, ***REMOVED*** useReducer, useState , useEffect}  from "react";
-import ***REMOVED*** useParams } from "react-router-dom";
+import React, { useReducer, useState , useEffect}  from "react";
+import { useParams } from "react-router-dom";
 import CourseInfo from "../components/courseInfo";
 import Reviews from "../components/Reviews";
 import NewReview from "../components/NewReview";
-const courseReducer = (state, action) => ***REMOVED***
-    switch(action.type) ***REMOVED***
+const courseReducer = (state, action) => {
+    switch(action.type) {
       case 'FETCH_COURSE_START':
-        return ***REMOVED***
+        return {
           ...state,
           isLoadingCourse: true
-      ***REMOVED***;
+        };
       case 'FETCH_COURSE_SUCCESS':
-        return ***REMOVED***
+        return {
           ...state,
           isLoadingCourse: false,
           data: action.payload
-      ***REMOVED***;
+        };
       default: 
         throw new Error();
-  ***REMOVED***
-***REMOVED***;
+    }
+  };
 
-const reviewsReducer = (state, action) => ***REMOVED***
-  switch(action.type) ***REMOVED***
+const reviewsReducer = (state, action) => {
+  switch(action.type) {
     case 'FETCH_REVIEWS_START':
-      return ***REMOVED***
+      return {
         ...state,
         isLoadingReviews: true
-    ***REMOVED***;
+      };
     case 'FETCH_REVIEWS_SUCCESS':
-      return ***REMOVED***
+      return {
         ...state,
         isLoadingReviews: false,
         data: action.payload
-    ***REMOVED***;
+      };
     default: 
       throw new Error();
-***REMOVED***
+  }
 };
 
 
-function titleCase(str) ***REMOVED***
+function titleCase(str) {
   var splitStr = str.toLowerCase().split(' ');
-  for (var i = 0; i < splitStr.length; i++) ***REMOVED***
+  for (var i = 0; i < splitStr.length; i++) {
       // You do not need to check if i is larger than splitStr length, as your for does that for you
       // Assign it back to the array
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-***REMOVED***
+  }
   // Directly return the joined string
   return splitStr.join(' '); 
 }
 
 
-const CoursePage = () => ***REMOVED***
+const CoursePage = () => {
   const params = useParams()
   const id = params.courseid;
 
   const [course, dispatchCourse] = useReducer(
       courseReducer,
-      ***REMOVED***data: [], isLoadingCourse: false} 
+      {data: [], isLoadingCourse: false} 
   );
 
   const [reviews, dispatchReviews] = useReducer(
     reviewsReducer,
-    ***REMOVED***data: [], isLoadingReviews: false}
+    {data: [], isLoadingReviews: false}
   );
 
   const [isLoadingCourse, setIsLoadingCourse] = useState(false);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
 
 
-  useEffect(() => ***REMOVED***
-    dispatchCourse(***REMOVED***type: 'FETCH_COURSE_START'});
-    fetch(`/getCourseById?id=$***REMOVED***id}`)
+  useEffect(() => {
+    dispatchCourse({type: 'FETCH_COURSE_START'});
+    fetch(`/getCourseById?id=${id}`)
       .then(response => response.json())
       .then(
-        result => ***REMOVED***
-          dispatchCourse(***REMOVED***
+        result => {
+          dispatchCourse({
             type: 'FETCH_COURSE_SUCCESS',
             payload: result.course
-        ***REMOVED***)
-      ***REMOVED***
+          })
+        }
       )
       .catch((e) => console.log("error fetching courses " +e))
 
       
-***REMOVED***, [])
+  }, [])
 
-  useEffect(() => ***REMOVED***
-    dispatchReviews(***REMOVED***type: 'FETCH_REVIEWS_START'});
-    fetch(`/getReviewsByCourseKey?key=$***REMOVED***id}`)
+  useEffect(() => {
+    dispatchReviews({type: 'FETCH_REVIEWS_START'});
+    fetch(`/getReviewsByCourseKey?key=${id}`)
       .then(response => response.json())
       .then(
-        result => ***REMOVED*** //Mulig dette ikke funker
+        result => { //Mulig dette ikke funker
           var array = [];
           var data = result.data;
-          for(var key in data) ***REMOVED***
+          for(var key in data) {
             var review = data[key];
             review.id=key;
             array.push(review);
-        ***REMOVED***
-          dispatchReviews(***REMOVED***
+          }
+          dispatchReviews({
             payload: array,
             type: 'FETCH_REVIEWS_SUCCESS',
-        ***REMOVED***)
-      ***REMOVED***
+          })
+        }
       )
       .catch((e) => console.log("error fetching reviews " +e))
-***REMOVED***, [])
+  }, [])
 
  //TODO: Hvis reviews.equivalent (alle) != course.equivalents : updateEquivalents!
 
   const [popupOpen, setPopupOpen] = useState(0);
 
-  const handleButtonClick = event => ***REMOVED***
+  const handleButtonClick = event => {
     setPopupOpen(0)
-***REMOVED***
+  }
 
-  const handleNewReviewClick = event => ***REMOVED***
+  const handleNewReviewClick = event => {
     setPopupOpen(1)
-***REMOVED***
+  }
 //Todo: Legg til review. effect: ved ny review, oppdater course (Legg til i semester, equivalent og sånt). 
 //      Rediger course (Bare la alle redigere?)
 
   return (
     <div>
-        ***REMOVED***course.isLoadingCourse ? (<p>Laster inn fag...</p>):
-        (<CourseInfo course=***REMOVED***course.data}/>)}
-        <Reviews reviews=***REMOVED***reviews.data} handleNewReview=***REMOVED***handleNewReviewClick}/> ***REMOVED***/* OBS do the same as CourseInfo with loader and states */}
-        <NewReview showPopup=***REMOVED***popupOpen} handleCloseButton=***REMOVED***handleButtonClick} courseKey=***REMOVED***id}/>
+        {course.isLoadingCourse ? (<p>Laster inn fag...</p>):
+        (<CourseInfo course={course.data}/>)}
+        <Reviews reviews={reviews.data} handleNewReview={handleNewReviewClick}/> {/* OBS do the same as CourseInfo with loader and states */}
+        <NewReview showPopup={popupOpen} handleCloseButton={handleButtonClick} courseKey={id}/>
     </div>
   );
 };

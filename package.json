@@ -1,23 +1,23 @@
-***REMOVED***
+{
   "name": "ntnutveksling",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": ***REMOVED***
+  "scripts": {
     "start": "node server/index2.js"
-***REMOVED***,
-  "repository": ***REMOVED***
+  },
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/AndreasBakke/NTNUtveksling.git"
-***REMOVED***,
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": ***REMOVED***
+  "bugs": {
     "url": "https://github.com/AndreasBakke/NTNUtveksling/issues"
-***REMOVED***,
+  },
   "homepage": "https://github.com/AndreasBakke/NTNUtveksling#readme",
-  "dependencies": ***REMOVED***
+  "dependencies": {
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -28,5 +28,5 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.7.0",
     "styled-components": "^5.3.6"
-***REMOVED***
+  }
 }

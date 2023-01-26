@@ -1,17 +1,17 @@
 
-***REMOVED***
-    "countries":***REMOVED***},
+{
+    "countries":{},
 
-    "cities":***REMOVED***
-  ***REMOVED***,
+    "cities":{
+    },
 
-    "universities": ***REMOVED***
-  ***REMOVED***,
+    "universities": {
+    },
 
-    "courses": ***REMOVED***
-  ***REMOVED***,
+    "courses": {
+    },
 
-    "reviews": ***REMOVED***
-  ***REMOVED***
+    "reviews": {
+    }
 }
 
