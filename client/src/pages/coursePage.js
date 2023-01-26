@@ -2,7 +2,7 @@ import React, ***REMOVED*** useReducer, useState , useEffect}  from "react";
 import ***REMOVED*** useParams } from "react-router-dom";
 import CourseInfo from "../components/courseInfo";
 import Reviews from "../components/Reviews";
-
+import NewReview from "../components/NewReview";
 const courseReducer = (state, action) => ***REMOVED***
     switch(action.type) ***REMOVED***
       case 'FETCH_COURSE_START':
@@ -22,7 +22,6 @@ const courseReducer = (state, action) => ***REMOVED***
 ***REMOVED***;
 
 const reviewsReducer = (state, action) => ***REMOVED***
-  console.log(action)
   switch(action.type) ***REMOVED***
     case 'FETCH_REVIEWS_START':
       return ***REMOVED***
@@ -94,7 +93,6 @@ const CoursePage = () => ***REMOVED***
       .then(response => response.json())
       .then(
         result => ***REMOVED*** //Mulig dette ikke funker
-          console.log(result)
           var array = [];
           var data = result.data;
           for(var key in data) ***REMOVED***
@@ -111,14 +109,26 @@ const CoursePage = () => ***REMOVED***
       .catch((e) => console.log("error fetching reviews " +e))
 ***REMOVED***, [])
 
+ //TODO: Hvis reviews.equivalent (alle) != course.equivalents : updateEquivalents!
 
+  const [popupOpen, setPopupOpen] = useState(0);
 
+  const handleButtonClick = event => ***REMOVED***
+    setPopupOpen(0)
+***REMOVED***
+
+  const handleNewReviewClick = event => ***REMOVED***
+    setPopupOpen(1)
+***REMOVED***
+//Todo: Legg til review. effect: ved ny review, oppdater course (Legg til i semester, equivalent og sånt). 
+//      Rediger course (Bare la alle redigere?)
 
   return (
     <div>
         ***REMOVED***course.isLoadingCourse ? (<p>Laster inn fag...</p>):
         (<CourseInfo course=***REMOVED***course.data}/>)}
-        <Reviews reviews=***REMOVED***reviews.data}/> ***REMOVED***/* OBS do the same as CourseInfo with loader and states */}
+        <Reviews reviews=***REMOVED***reviews.data} handleNewReview=***REMOVED***handleNewReviewClick}/> ***REMOVED***/* OBS do the same as CourseInfo with loader and states */}
+        <NewReview showPopup=***REMOVED***popupOpen} handleCloseButton=***REMOVED***handleButtonClick} courseKey=***REMOVED***id}/>
     </div>
   );
 };

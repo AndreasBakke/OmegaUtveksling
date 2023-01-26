@@ -237,8 +237,6 @@ const handleButtonClick = () => ***REMOVED***
   getFormData(course, review)
   .then(valid => ***REMOVED***
     if(valid && courseAddedInSession == 0)***REMOVED***
-      console.log("Valid!")
-      //some wait icon
       addCourse(course) //AddCourse need to look for dupes
       .then(response => ***REMOVED***
         console.log(response)
@@ -247,8 +245,10 @@ const handleButtonClick = () => ***REMOVED***
           courseAddedInSession=1;
           review.timestamp = d.getTime();
           addReview(response.key, review);
-      ***REMOVED***
+      ***REMOVED*** 
     ***REMOVED***)
+  ***REMOVED*** else ***REMOVED***
+      document.getElementById("feilInfo").style.visibility="visible";
   ***REMOVED***
 ***REMOVED***)
   console.log(course)
@@ -443,7 +443,7 @@ const NewCourses = () => ***REMOVED***
             </div>
 
             <div className="courseField">
-              <label className="courseLabel">Hvor godt likte du emnet?: </label>*<br></br>
+              <label className="courseLabel">Hvor godt likte du emnet? </label>*<br></br>
               <div className="rate">
                 <input type="radio" id="star5_enjoyment" name="rate_enjoyment" value="5" />
                 <label htmlFor="star5_enjoyment" title="text">5 stars</label>
@@ -460,6 +460,9 @@ const NewCourses = () => ***REMOVED***
             <div className="courseField">
               <label className="courseLabel" htmlFor="comment">Kommentarer om emnet:</label><br></br>
               <input type="text" className="courseTextInput" id="comment" placeholder="Flink professor? Spesielle forkunnskaper?"></input>
+            </div>
+            <div id="feilInfo" style=***REMOVED******REMOVED***textAlign: "center", marginBottom: "10px", color: "darkred", visibility: "hidden"}}>
+              Noe gikk galt! Sjekk at du har fylt ut alle felt med *, eller prøv igjen senere!
             </div>
             <div className="buttonDiv">
               <button className="addCourseBtn" onClick=***REMOVED***handleButtonClick}>Legg til emne</button>

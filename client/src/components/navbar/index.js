@@ -15,7 +15,7 @@ return (
         Oversikt
       </NavLink>
       <NavLink to="/newCourses" activestyle="true">
-        Legg til emner
+        Legg til emne
       </NavLink>
       <NavLink to="/about" activestyle="true">
         Om

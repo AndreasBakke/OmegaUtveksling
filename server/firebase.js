@@ -46,7 +46,6 @@ const dbOperations=***REMOVED***
         newReview = course.push(obj.review); //Endre denne til å bruke key som child av review så vi får reviews-courseKey-[x,y,z]
   ***REMOVED***,
     
-    
 }
 //Update addCourse to something like this ( handle dupes)
 /*

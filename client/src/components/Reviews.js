@@ -10,38 +10,56 @@ function computeAverage(reviews, par) ***REMOVED***
     var score = 0;
     for(var key in reviews) ***REMOVED***
         var review = reviews[key]
-        console.log(review)
         numReviews ++;
         score += parseFloat(review[par]);
   ***REMOVED***
 
-    return Number((score/numReviews).toFixed(2))
+    return Number((score/numReviews).toFixed(1))
 }
 
+function getAllEquivalents(reviews)***REMOVED***
+    var equivalents = []
+    for(var key in reviews) ***REMOVED***
+        var review = reviews[key];
+        for(var key2 in review.equivalent ) ***REMOVED***
+            var equivalent = review.equivalent[key2]
+            if(equivalents.indexOf(equivalent) === -1)  equivalents.push(equivalent);
+      ***REMOVED***
+  ***REMOVED***
+    return equivalents.join(", ")
+}
 
-const Reviews = (***REMOVED***reviews}) => ***REMOVED***
+const Reviews = (***REMOVED***reviews, handleNewReview}) => ***REMOVED***
     if(reviews.length==0) return ""
     const sortedReviews = reviews.sort((a,b) => ***REMOVED***
-        if(a.timestamp <b.timestamp) ***REMOVED***
+        console.log(b.semester[2])
+        if(a.semester[2] >b.semester[2]) ***REMOVED***
             return -1
       ***REMOVED***
   ***REMOVED***)
 
     return (
         <div className="reviewsDiv">
-            <h1 className="centerHeader">Vurderinger</h1>
-
+            <h1 className="centerHeader" style=***REMOVED******REMOVED***marginBottom: "5px"}}>Vurderinger</h1>
             <div className="averageDiv">
                 <h3>Gjennomsnitt:</h3>
+                    <p>
+                        <strong>Vanskelighetsgrad: </strong> ***REMOVED***computeAverage(reviews, "difficulty")}/5<br></br>
+                        <strong>Relevanse: </strong> ***REMOVED***computeAverage(reviews, "relevance")}/5<br></br>
+                        <strong>Likte faget: </strong> ***REMOVED***computeAverage(reviews, "enjoyment")}/5<br></br>
+                    </p>
+            </div>
+            <div className="equivalenceDiv">
                 <p>
-                    <strong>Vanskelighetsgrad: </strong> ***REMOVED***computeAverage(reviews, "difficulty")}/5<br></br>
-                    <strong>Relevanse: </strong> ***REMOVED***computeAverage(reviews, "relevance")}/5<br></br>
-                    <strong>Likte faget: </strong> ***REMOVED***computeAverage(reviews, "enjoyment")}/5<br></br>
+                    <strong>Tidligere godkjent som: </strong> ***REMOVED***getAllEquivalents(reviews)}
                 </p>
             </div>
 
+
+            <p style=***REMOVED******REMOVED***textAlign: "right", fontSize: "20px", margin: "0", marginBottom: "5px"}} ><span onClick=***REMOVED***handleNewReview} style=***REMOVED******REMOVED*** cursor: "pointer"}}>Legg til ny + </span></p>
+
             ***REMOVED***sortedReviews.map(review => ***REMOVED***
-                return(<div className="review">
+                return(<div className="review" key=***REMOVED***review.timestamp}>
                     <div className="reviewInfo">
                         <p>
                             <strong>Når: </strong> ***REMOVED***capitalizeFirstLetter(review.semester)}<br></br>
@@ -52,7 +70,6 @@ const Reviews = (***REMOVED***reviews}) => ***REMOVED***
                     </div>
 
                     <div className="starRatings">
-                        <p>
                         <div className="starR starDiff">
                             <strong>Vanskelighetsgrad: </strong> 
                             <span id="1" className=***REMOVED***review.difficulty >= 1 ? "starYellow" : "starGrey"}>&#9733;</span>
@@ -79,7 +96,6 @@ const Reviews = (***REMOVED***reviews}) => ***REMOVED***
                             <span className=***REMOVED***review.enjoyment >= 4 ? "starYellow" : "starGrey"}>&#9733;</span>
                             <span className=***REMOVED***review.enjoyment == 5 ? "starYellow" : "starGrey"}>&#9733;</span>
                         </div>
-                        </p>
                     </div>
 
                 </div>)
